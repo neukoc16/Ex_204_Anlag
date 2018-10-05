@@ -3,16 +3,17 @@ import java.time.LocalDate;
 
 public class Anlage {
 
-    private String name;
-    private double anschaffungsKosten;
-    private LocalDate inbetriebNahme;
-    private int nutzungsdauer;
+    private final String name;
+    private final double anschaffungsKosten;
+    private final LocalDate inbetriebNahme;
+    private final int nutzungsdauer;
 
-    public Anlage(String name, double anschaffungsKosten, LocalDate inbetriebNahme, int nutzungsdauer) {
-        this.name = name;
-        this.anschaffungsKosten = anschaffungsKosten;
-        this.inbetriebNahme = inbetriebNahme;
-        this.nutzungsdauer = nutzungsdauer;
+    public Anlage(String line) {
+        String[] array = line.split(";");
+        name = array[0];
+        anschaffungsKosten = Double.parseDouble(array[1]);
+        inbetriebNahme = LocalDate.parse(array[2]);
+        nutzungsdauer = Integer.parseInt(array[3]);
     }
 
     private String getName() {
