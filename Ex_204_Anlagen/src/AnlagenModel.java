@@ -1,10 +1,9 @@
 
-import java.io.EOFException;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -28,6 +27,11 @@ public class AnlagenModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return colNames.length;
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        return colNames[column];
     }
 
     @Override
@@ -78,14 +82,16 @@ public class AnlagenModel extends AbstractTableModel {
     }
 
     public void load(File f) throws FileNotFoundException, IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
-            try {
-                Object an;
-                while ((an = ois.readObject()) != null) {
-                    add((Anlage) an);
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            String s;
+            while ((s = br.readLine()) != null) {
+                try {
+                    add(new Anlage(s));
+                } catch (Exception ex) {
                 }
-            } catch (EOFException ex) {
             }
+        } catch (Exception e) {
+
         }
     }
 }

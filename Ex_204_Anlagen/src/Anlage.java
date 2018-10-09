@@ -1,20 +1,20 @@
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Anlage {
 
     private final String name;
     private final double anschaffungsKosten;
-    private final LocalDate inbetriebNahme;
+    private final double inbetriebNahme;
     private final int nutzungsdauer;
 
     public Anlage(String line) {
         System.out.println(line);
+        line = line.replace(",", ".");
         String[] array = line.split(";");
         name = array[0];
         anschaffungsKosten = Double.parseDouble(array[1]);
-        inbetriebNahme = LocalDate.parse(array[2], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        inbetriebNahme = Double.parseDouble(array[2]);
         nutzungsdauer = Integer.parseInt(array[3]);
     }
 
@@ -26,7 +26,7 @@ public class Anlage {
         return anschaffungsKosten;
     }
 
-    public LocalDate getInbetriebNahme() {
+    public double getInbetriebNahme() {
         return inbetriebNahme;
     }
 
