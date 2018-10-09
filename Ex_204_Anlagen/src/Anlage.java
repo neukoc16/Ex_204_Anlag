@@ -40,7 +40,7 @@ public class Anlage {
 
     public double getAfaBish(double year) {
         if(getBishND(year) < 0)
-            return -1;
+            return 0;
         if(getBishND(year) > nutzungsdauer)
             return anschaffungsKosten;
         return getBishND(year) * (anschaffungsKosten / nutzungsdauer);
@@ -48,7 +48,7 @@ public class Anlage {
 
     public double getAfaThisYear(double year) {
         if(getBishND(year) < 0)
-            return -1;
+            return 0;
         if(getBishND(year) > nutzungsdauer)
             return 0;
         if(getBishND(year) < .6 || getBishND(year) > (nutzungsdauer - .6))
@@ -57,6 +57,10 @@ public class Anlage {
     }
 
     public double getBWStartOfYear(double year) {
+        if(getBishND(year) < 0)
+            return 0;
+        if(getBishND(year) > nutzungsdauer)
+            return 0;
         return anschaffungsKosten - getAfaBish(year);
     }
 
