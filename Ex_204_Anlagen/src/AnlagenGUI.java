@@ -2,13 +2,10 @@
 import java.io.File;
 import java.time.LocalDate;
 
-
-
-
 public class AnlagenGUI extends javax.swing.JFrame {
 
     AnlagenModel model = new AnlagenModel(LocalDate.of(2017, 1, 1));
-    
+
     public AnlagenGUI() {
         initComponents();
         tbtbale.setModel(model);
