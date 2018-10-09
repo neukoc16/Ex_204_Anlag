@@ -6,6 +6,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class AnlagenModel extends AbstractTableModel {
 
+    private static String[] colNames = {"Bezeichnung", "AK", "Inbetriebnahme",
+        "ND", "bish. ND", "Afa bisher", "Wert vor ...", "Afa d. J.", "BW 32.12"};
     private ArrayList<Anlage> anlagen = new ArrayList<>();
     private LocalDate year;
 
@@ -20,7 +22,7 @@ public class AnlagenModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 9;
+        return colNames.length;
     }
 
     @Override
