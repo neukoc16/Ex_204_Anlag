@@ -47,9 +47,13 @@ public class AnlagenModel extends AbstractTableModel {
     }
 
     public void add(Anlage a) {
+        anlagen.add(a);
+        fireTableRowsInserted(anlagen.size()-1, anlagen.size()-1);
     }
 
     public void remove(int idx) {
+        anlagen.remove(idx);
+        fireTableRowsDeleted(idx, idx);
     }
 
     public void load(File f) {
