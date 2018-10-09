@@ -33,17 +33,27 @@ public class AnlagenModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Anlage a = anlagen.get(rowIndex);
-        switch(columnIndex) {
-            case 0: return a.getName();
-            case 1: return a.getAnschaffungsKosten();
-            case 2: return a.getInbetriebNahme();
-            case 3: return a.getNutzungsdauer();
-            case 4: return a.getBishND(year);
-            case 5: return a.getAfaBish(year);
-            case 6: return a.getBWStartOfYear(year);
-            case 7: return a.getAfaThisYear(year);
-            case 8: return a.getBWEndOfYear(year);
-            default: return "boi";
+        switch (columnIndex) {
+            case 0:
+                return a.getName();
+            case 1:
+                return a.getAnschaffungsKosten();
+            case 2:
+                return a.getInbetriebNahme();
+            case 3:
+                return a.getNutzungsdauer();
+            case 4:
+                return a.getBishND(year);
+            case 5:
+                return a.getAfaBish(year);
+            case 6:
+                return a.getBWStartOfYear(year);
+            case 7:
+                return a.getAfaThisYear(year);
+            case 8:
+                return a.getBWEndOfYear(year);
+            default:
+                return "boi";
         }
     }
 
@@ -53,7 +63,7 @@ public class AnlagenModel extends AbstractTableModel {
 
     public void add(Anlage a) {
         anlagen.add(a);
-        fireTableRowsInserted(anlagen.size()-1, anlagen.size()-1);
+        fireTableRowsInserted(anlagen.size() - 1, anlagen.size() - 1);
     }
 
     public void remove(int idx) {
