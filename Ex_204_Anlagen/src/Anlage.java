@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Anlage {
 
@@ -9,26 +10,27 @@ public class Anlage {
     private final int nutzungsdauer;
 
     public Anlage(String line) {
+        System.out.println(line);
         String[] array = line.split(";");
         name = array[0];
         anschaffungsKosten = Double.parseDouble(array[1]);
-        inbetriebNahme = LocalDate.parse(array[2]);
+        inbetriebNahme = LocalDate.parse(array[2], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         nutzungsdauer = Integer.parseInt(array[3]);
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
-    private double getAnschaffungsKosten() {
+    public double getAnschaffungsKosten() {
         return anschaffungsKosten;
     }
 
-    private LocalDate getInbetriebNahme() {
+    public LocalDate getInbetriebNahme() {
         return inbetriebNahme;
     }
 
-    private int getNutzungsdauer() {
+    public int getNutzungsdauer() {
         return nutzungsdauer;
     }
 
