@@ -6,7 +6,7 @@ public class Anlage {
 
     private final String name;
     private final double anschaffungsKosten;
-    private final LocalDate inbetriebNahme;
+    private final double inbetriebNahme;
     private final int nutzungsdauer;
 
     public Anlage(String line) {
@@ -14,7 +14,7 @@ public class Anlage {
         String[] array = line.split(";");
         name = array[0];
         anschaffungsKosten = Double.parseDouble(array[1]);
-        inbetriebNahme = LocalDate.parse(array[2], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        inbetriebNahme = Double.parseDouble(array[2]);
         nutzungsdauer = Integer.parseInt(array[3]);
     }
 
@@ -26,7 +26,7 @@ public class Anlage {
         return anschaffungsKosten;
     }
 
-    public LocalDate getInbetriebNahme() {
+    public double getInbetriebNahme() {
         return inbetriebNahme;
     }
 
@@ -34,23 +34,38 @@ public class Anlage {
         return nutzungsdauer;
     }
 
-    public double getBishND(LocalDate year) {
-        return 0;
+    public double getBishND(double year) {
+        double months = year - inbetriebNahme;
+        double years = months / 12;
+        if(months % 12 >= 6)
+            years += .5;
+        return years;
     }
 
-    public double getAfaBish(LocalDate year) {
-        return 0;
+    public double getAfaBish(double year) {
+        if(getBishND(year) < 0)
+            return -1;
+        if(getBishND(year) > nutzungsdauer)
+            return anschaffungsKosten;
+        int wholeYears = (int) getBishND(year);
+        return wholeYears * (anschaffungsKosten / nutzungsdauer);
     }
 
-    public double getAfaThisYear(LocalDate year) {
-        return 0;
+    public double getAfaThisYear(double year) {
+        if(getBishND(year) < 0)
+            return -1;
+        if(getBishND(year) > nutzungsdauer)
+            return 0;
+        if(getBishND(year) < .6 || getBishND(year) > (nutzungsdauer - .6))
+            return (anschaffungsKosten / nutzungsdauer) / 2;
+        return anschaffungsKosten / nutzungsdauer;
     }
 
-    public double getBWEndOfYear(LocalDate year) {
-        return 0;
+    public double getBWStartOfYear(double year) {
+        return anschaffungsKosten - getAfaBish(year);
     }
 
-    public double getBWStartOfYear(LocalDate year) {
-        return 0;
+    public double getBWEndOfYear(double year) {
+        return getBWStartOfYear(year) - getAfaThisYear(year);
     }
 }
