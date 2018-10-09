@@ -1,6 +1,5 @@
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -9,9 +8,9 @@ public class AnlagenModel extends AbstractTableModel {
     private static String[] colNames = {"Bezeichnung", "AK", "Inbetriebnahme",
         "ND", "bish. ND", "Afa bisher", "Wert vor ...", "Afa d. J.", "BW 32.12"};
     private ArrayList<Anlage> anlagen = new ArrayList<>();
-    private LocalDate year;
+    private double year;
 
-    public AnlagenModel(LocalDate year) {
+    public AnlagenModel(double year) {
         this.year = year;
     }
 
@@ -42,7 +41,7 @@ public class AnlagenModel extends AbstractTableModel {
         }
     }
 
-    private void setYear(LocalDate year) {
+    private void setYear(double year) {
         this.year = year;
     }
 
