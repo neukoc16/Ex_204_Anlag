@@ -1,5 +1,9 @@
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -25,19 +29,34 @@ public class AnlagenModel extends AbstractTableModel {
     }
 
     @Override
+    public String getColumnName(int column) {
+        return colNames[column];
+    }
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Anlage a = anlagen.get(rowIndex);
-        switch(columnIndex) {
-            case 0: return a.getName();
-            case 1: return a.getAnschaffungsKosten();
-            case 2: return a.getInbetriebNahme();
-            case 3: return a.getNutzungsdauer();
-            case 4: return a.getBishND(year);
-            case 5: return a.getAfaBish(year);
-            case 6: return a.getBWStartOfYear(year);
-            case 7: return a.getAfaThisYear(year);
-            case 8: return a.getBWEndOfYear(year);
-            default: return "boi";
+        switch (columnIndex) {
+            case 0:
+                return a.getName();
+            case 1:
+                return a.getAnschaffungsKosten();
+            case 2:
+                return a.getInbetriebNahme();
+            case 3:
+                return a.getNutzungsdauer();
+            case 4:
+                return a.getBishND(year);
+            case 5:
+                return a.getAfaBish(year);
+            case 6:
+                return a.getBWStartOfYear(year);
+            case 7:
+                return a.getAfaThisYear(year);
+            case 8:
+                return a.getBWEndOfYear(year);
+            default:
+                return "boi";
         }
     }
 
@@ -47,15 +66,12 @@ public class AnlagenModel extends AbstractTableModel {
 
     public void add(Anlage a) {
         anlagen.add(a);
-        fireTableRowsInserted(anlagen.size()-1, anlagen.size()-1);
+        fireTableRowsInserted(anlagen.size() - 1, anlagen.size() - 1);
     }
 
     public void remove(int idx) {
         anlagen.remove(idx);
         fireTableRowsDeleted(idx, idx);
-    }
-
-    public void load(File f) {
     }
 
     public void save(File f) {
@@ -64,4 +80,17 @@ public class AnlagenModel extends AbstractTableModel {
     public void updateTable() {
     }
 
+    public void load(File f) throws FileNotFoundException, IOException, ClassNotFoundException {
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            String s;
+            while ((s = br.readLine()) != null) {
+                try {
+                    add(new Anlage(s));
+                } catch (Exception ex) {
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
 }

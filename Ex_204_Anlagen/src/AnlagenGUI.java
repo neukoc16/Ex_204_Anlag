@@ -8,8 +8,10 @@ public class AnlagenGUI extends javax.swing.JFrame {
     public AnlagenGUI() {
         initComponents();
         tbtbale.setModel(model);
-        model.add(new Anlage("name;100;10.10.2010;10"));
-        model.load(new File("./anlagenverzeichnis.csv"));
+        try {
+            model.load(new File("./anlagenverzeichnis.csv"));
+        } catch (Exception ex) {
+        }
     }
 
     @SuppressWarnings("unchecked")

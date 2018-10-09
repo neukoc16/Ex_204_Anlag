@@ -1,6 +1,5 @@
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Anlage {
 
@@ -11,6 +10,7 @@ public class Anlage {
 
     public Anlage(String line) {
         System.out.println(line);
+        line = line.replace(",", ".");
         String[] array = line.split(";");
         name = array[0];
         anschaffungsKosten = Double.parseDouble(array[1]);
