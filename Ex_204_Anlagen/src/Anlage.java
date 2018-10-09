@@ -16,19 +16,19 @@ public class Anlage {
         nutzungsdauer = Integer.parseInt(array[3]);
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
-    private double getAnschaffungsKosten() {
+    public double getAnschaffungsKosten() {
         return anschaffungsKosten;
     }
 
-    private LocalDate getInbetriebNahme() {
+    public LocalDate getInbetriebNahme() {
         return inbetriebNahme;
     }
 
-    private int getNutzungsdauer() {
+    public int getNutzungsdauer() {
         return nutzungsdauer;
     }
 
