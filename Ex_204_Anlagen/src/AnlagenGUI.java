@@ -3,7 +3,7 @@ import java.io.File;
 
 public class AnlagenGUI extends javax.swing.JFrame {
 
-    AnlagenModel model = new AnlagenModel(2017);
+    AnlagenModel model = new AnlagenModel(2016);
 
     public AnlagenGUI() {
         initComponents();

@@ -1,5 +1,4 @@
 
-import java.time.LocalDate;
 
 public class Anlage {
 
@@ -10,6 +9,7 @@ public class Anlage {
 
     public Anlage(String line) {
         System.out.println(line);
+        line = line.replace(".", "");
         line = line.replace(",", ".");
         String[] array = line.split(";");
         name = array[0];
@@ -35,11 +35,7 @@ public class Anlage {
     }
 
     public double getBishND(double year) {
-        double months = year - inbetriebNahme;
-        double years = months / 12;
-        if(months % 12 >= 6)
-            years += .5;
-        return years;
+        return year - inbetriebNahme;
     }
 
     public double getAfaBish(double year) {
@@ -47,8 +43,7 @@ public class Anlage {
             return -1;
         if(getBishND(year) > nutzungsdauer)
             return anschaffungsKosten;
-        int wholeYears = (int) getBishND(year);
-        return wholeYears * (anschaffungsKosten / nutzungsdauer);
+        return getBishND(year) * (anschaffungsKosten / nutzungsdauer);
     }
 
     public double getAfaThisYear(double year) {
