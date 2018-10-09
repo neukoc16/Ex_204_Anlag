@@ -1,5 +1,10 @@
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -40,13 +45,21 @@ public class AnlagenModel extends AbstractTableModel {
     public void remove(int idx) {
     }
 
-    public void load(File f) {
-    }
-
     public void save(File f) {
     }
 
     public void updateTable() {
     }
 
+    public void load(File f) throws FileNotFoundException, IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
+            try {
+                Object an;
+                while ((an = ois.readObject()) != null) {
+                    add((Anlage) an);
+                }
+            } catch (EOFException ex) {
+            }
+        }
+    }
 }
