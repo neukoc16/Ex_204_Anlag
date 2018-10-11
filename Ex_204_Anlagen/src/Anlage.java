@@ -34,6 +34,9 @@ public class Anlage {
     }
 
     public double getBishND(double year) {
+        if(year < inbetriebNahme) {
+            return 0;
+        }
         return year - inbetriebNahme;
     }
 
@@ -46,7 +49,7 @@ public class Anlage {
     }
 
     public double getAfaThisYear(double year) {
-        if(getBishND(year) < 0)
+        if(getBishND(year) <= 0)
             return 0;
         if(getBishND(year) > nutzungsdauer)
             return 0;
