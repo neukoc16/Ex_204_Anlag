@@ -1,5 +1,4 @@
 
-import java.time.LocalDate;
 
 public class Anlage {
 
@@ -9,7 +8,7 @@ public class Anlage {
     private final int nutzungsdauer;
 
     public Anlage(String line) {
-        System.out.println(line);
+        line = line.replace(".", "");
         line = line.replace(",", ".");
         String[] array = line.split(";");
         name = array[0];
@@ -34,23 +33,40 @@ public class Anlage {
         return nutzungsdauer;
     }
 
-    public double getBishND(LocalDate year) {
-        return 0;
+    public double getBishND(double year) {
+        if(year < inbetriebNahme) {
+            return 0;
+        }
+        return year - inbetriebNahme;
     }
 
-    public double getAfaBish(LocalDate year) {
-        return 0;
+    public double getAfaBish(double year) {
+        if(getBishND(year) < 0)
+            return 0;
+        if(getBishND(year) > nutzungsdauer)
+            return anschaffungsKosten;
+        return getBishND(year) * (anschaffungsKosten / nutzungsdauer);
     }
 
-    public double getAfaThisYear(LocalDate year) {
-        return 0;
+    public double getAfaThisYear(double year) {
+        if(getBishND(year) <= 0)
+            return 0;
+        if(getBishND(year) > nutzungsdauer)
+            return 0;
+        if(getBishND(year) < .6 || getBishND(year) > (nutzungsdauer - .6))
+            return (anschaffungsKosten / nutzungsdauer) / 2;
+        return anschaffungsKosten / nutzungsdauer;
     }
 
-    public double getBWEndOfYear(LocalDate year) {
-        return 0;
+    public double getBWStartOfYear(double year) {
+        if(getBishND(year) < 0)
+            return 0;
+        if(getBishND(year) > nutzungsdauer)
+            return 0;
+        return anschaffungsKosten - getAfaBish(year);
     }
 
-    public double getBWStartOfYear(LocalDate year) {
-        return 0;
+    public double getBWEndOfYear(double year) {
+        return getBWStartOfYear(year) - getAfaThisYear(year);
     }
 }

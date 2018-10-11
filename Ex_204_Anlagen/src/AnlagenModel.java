@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,9 +12,9 @@ public class AnlagenModel extends AbstractTableModel {
     private static String[] colNames = {"Bezeichnung", "AK", "Inbetriebnahme",
         "ND", "bish. ND", "Afa bisher", "Wert vor ...", "Afa d. J.", "BW 32.12"};
     private ArrayList<Anlage> anlagen = new ArrayList<>();
-    private LocalDate year;
+    private double year;
 
-    public AnlagenModel(LocalDate year) {
+    public AnlagenModel(double year) {
         this.year = year;
 
     }
@@ -62,8 +61,9 @@ public class AnlagenModel extends AbstractTableModel {
         }
     }
 
-    private void setYear(LocalDate year) {
+    public void setYear(double year) {
         this.year = year;
+        fireTableRowsUpdated(0, anlagen.size()-1);
     }
 
     public void add(Anlage a) {
@@ -74,12 +74,6 @@ public class AnlagenModel extends AbstractTableModel {
     public void remove(int idx) {
         anlagen.remove(idx);
         fireTableRowsDeleted(idx, idx);
-    }
-
-    public void save(File f) {
-    }
-
-    public void updateTable() {
     }
 
     public void load(File f) throws FileNotFoundException, IOException, ClassNotFoundException {

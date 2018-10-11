@@ -1,20 +1,19 @@
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class AnlagenGUI extends javax.swing.JFrame {
 
-    AnlagenModel model = new AnlagenModel(LocalDate.of(2017, 1, 1));
+    AnlagenModel model = new AnlagenModel(2016);
 
     public AnlagenGUI() {
+        initComponents();
+        tbtbale.setModel(model);
         try {
-            initComponents();
-            tbtbale.setModel(model);
             model.load(new File("./anlagenverzeichnis.csv"));
-        } catch (FileNotFoundException ex) {
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
+        }
+        for (int i = 2000; i < 2060; i++) {
+            cbyears.addItem(i+"");
         }
     }
 
@@ -86,7 +85,8 @@ public class AnlagenGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
-        // TODO add your handling code here:
+        int year = Integer.parseInt(cbyears.getSelectedItem().toString());
+        model.setYear(year);
     }//GEN-LAST:event_btupdateActionPerformed
 
     public static void main(String args[]) {
