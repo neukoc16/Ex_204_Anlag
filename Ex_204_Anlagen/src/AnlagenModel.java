@@ -17,6 +17,7 @@ public class AnlagenModel extends AbstractTableModel {
 
     public AnlagenModel(LocalDate year) {
         this.year = year;
+
     }
 
     @Override
