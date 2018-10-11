@@ -60,8 +60,9 @@ public class AnlagenModel extends AbstractTableModel {
         }
     }
 
-    private void setYear(double year) {
+    public void setYear(double year) {
         this.year = year;
+        fireTableRowsUpdated(0, anlagen.size()-1);
     }
 
     public void add(Anlage a) {
@@ -72,12 +73,6 @@ public class AnlagenModel extends AbstractTableModel {
     public void remove(int idx) {
         anlagen.remove(idx);
         fireTableRowsDeleted(idx, idx);
-    }
-
-    public void save(File f) {
-    }
-
-    public void updateTable() {
     }
 
     public void load(File f) throws FileNotFoundException, IOException, ClassNotFoundException {

@@ -12,6 +12,9 @@ public class AnlagenGUI extends javax.swing.JFrame {
             model.load(new File("./anlagenverzeichnis.csv"));
         } catch (Exception ex) {
         }
+        for (int i = 2000; i < 2060; i++) {
+            cbyears.addItem(i+"");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -82,7 +85,8 @@ public class AnlagenGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
-        // TODO add your handling code here:
+        int year = Integer.parseInt(cbyears.getSelectedItem().toString());
+        model.setYear(year);
     }//GEN-LAST:event_btupdateActionPerformed
 
     public static void main(String args[]) {

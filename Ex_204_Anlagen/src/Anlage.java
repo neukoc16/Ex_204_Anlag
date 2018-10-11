@@ -8,7 +8,6 @@ public class Anlage {
     private final int nutzungsdauer;
 
     public Anlage(String line) {
-        System.out.println(line);
         line = line.replace(".", "");
         line = line.replace(",", ".");
         String[] array = line.split(";");
