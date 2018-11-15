@@ -1,5 +1,4 @@
 
-
 public class Anlage {
 
     private final String name;
@@ -34,35 +33,42 @@ public class Anlage {
     }
 
     public double getBishND(double year) {
-        if(year < inbetriebNahme) {
+        if (year < inbetriebNahme) {
             return 0;
         }
         return year - inbetriebNahme;
     }
 
     public double getAfaBish(double year) {
-        if(getBishND(year) < 0)
+        if (getBishND(year) < 0) {
             return 0;
-        if(getBishND(year) > nutzungsdauer)
+        }
+        if (getBishND(year) > nutzungsdauer) {
             return anschaffungsKosten;
+        }
         return getBishND(year) * (anschaffungsKosten / nutzungsdauer);
     }
 
     public double getAfaThisYear(double year) {
-        if(getBishND(year) <= 0)
+        if (getBishND(year) <= 0) {
             return 0;
-        if(getBishND(year) > nutzungsdauer)
+        }
+        if (getBishND(year) > nutzungsdauer) {
             return 0;
-        if(getBishND(year) < .6 || getBishND(year) > (nutzungsdauer - .6))
+        }
+        if (getBishND(year) < .6 || getBishND(year) > (nutzungsdauer - .6)) {
             return (anschaffungsKosten / nutzungsdauer) / 2;
+        }
         return anschaffungsKosten / nutzungsdauer;
     }
 
     public double getBWStartOfYear(double year) {
-        if(getBishND(year) < 0)
+        if (getBishND(year) < 0) {
             return 0;
-        if(getBishND(year) > nutzungsdauer)
+        }
+        if (getBishND(year) > nutzungsdauer) {
             return 0;
+        }
         return anschaffungsKosten - getAfaBish(year);
     }
 

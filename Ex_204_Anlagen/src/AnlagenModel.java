@@ -16,7 +16,6 @@ public class AnlagenModel extends AbstractTableModel {
 
     public AnlagenModel(double year) {
         this.year = year;
-
     }
 
     @Override
@@ -63,7 +62,7 @@ public class AnlagenModel extends AbstractTableModel {
 
     public void setYear(double year) {
         this.year = year;
-        fireTableRowsUpdated(0, anlagen.size()-1);
+        fireTableRowsUpdated(0, anlagen.size() - 1);
     }
 
     public void add(Anlage a) {
